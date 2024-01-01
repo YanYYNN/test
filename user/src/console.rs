@@ -1,7 +1,9 @@
 use core::fmt::{self, Write};
 use super::write;
+use super::read;
 
 const STDOUT: usize = 1;
+const STDIN: usize = 0;
 
 struct Stdout;
 
@@ -29,3 +31,9 @@ macro_rules! println {
         $crate::console::print(format_args!(concat!($fmt, "\n") $(, $($arg)+)?));
     }
 }
+pub fn getchar() -> u8 {
+    let mut c = [0u8; 1];
+    read(STDIN, &mut c);
+    c[0]
+}
+
